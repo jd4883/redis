@@ -1,0 +1,12 @@
+apiVersion: v2
+name: redis
+description: Redis HA via Spotahome RedisFailover CR in namespace redis. Credentials from 1Password optional.
+type: application
+version: 0.1.0
+appVersion: "7"
+kubeVersion: ">=1.21.0-0"
+keywords:
+  - redis
+home: https://github.com/spotahome/redis-operator
+sources:
+  - https://github.com/spotahome/redis-operator

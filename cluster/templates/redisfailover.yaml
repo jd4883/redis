@@ -1,0 +1,35 @@
+apiVersion: databases.spotahome.com/v1
+kind: RedisFailover
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  redis:
+    replicas: {{ .Values.redis.replicas }}
+    resources: {{ toJson (.Values.redis.resources | default dict) }}
+    # Soft affinity: prefer nodes with label node-role=database (homelab convention).
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+                - key: node-role
+                  operator: In
+                  values:
+                    - database
+  sentinel:
+    replicas: {{ .Values.sentinel.replicas }}
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+                - key: node-role
+                  operator: In
+                  values:
+                    - database
