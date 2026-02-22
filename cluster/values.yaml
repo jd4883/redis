@@ -1,0 +1,10 @@
+# RedisFailover (Spotahome) — deploy in namespace redis. Hostname: redis-master.redis.svc.cluster.local
+# Install redis-operator in cluster-tools first. Soft affinity to node-role=database; PDB allows one pod down at a time.
+
+name: redis
+redis:
+  replicas: 3
+  resources: {}
+  # Storage: configure per Spotahome RedisFailover CR (e.g. size, storageClass). Uses Longhorn when storageClass: longhorn.
+sentinel:
+  replicas: 3

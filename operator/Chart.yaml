@@ -1,0 +1,17 @@
+apiVersion: v2
+name: redis-operator
+description: Spotahome Redis operator — install in cluster-tools. Manages RedisFailover CRs (HA Redis with Sentinel).
+type: application
+version: 0.1.0
+appVersion: "1.4.0"
+kubeVersion: ">=1.21.0-0"
+keywords:
+  - redis
+  - cluster-tools
+home: https://github.com/spotahome/redis-operator
+sources:
+  - https://github.com/spotahome/redis-operator
+dependencies:
+  - name: redis-operator
+    version: "3.3.0"
+    repository: https://spotahome.github.io/redis-operator

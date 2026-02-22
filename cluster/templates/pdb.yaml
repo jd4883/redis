@@ -1,0 +1,32 @@
+# PDB: allow only one Redis pod down at a time (minAvailable = replicas - 1).
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .Values.name }}-redis
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  minAvailable: {{ sub .Values.redis.replicas 1 }}
+  selector:
+    matchLabels:
+      # Match pods created by Spotahome redis-operator for this RedisFailover
+      app.kubernetes.io/name: {{ .Values.name }}
+      app.kubernetes.io/component: redis
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .Values.name }}-sentinel
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  minAvailable: {{ sub .Values.sentinel.replicas 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.name }}
+      app.kubernetes.io/component: sentinel

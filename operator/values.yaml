@@ -1,0 +1,4 @@
+# Redis operator — install in cluster-tools. See README.
+# The Redis instance (RedisFailover) is deployed by the redis chart in this repo (cluster/).
+
+# Override namespace to cluster-tools when installing: helm install -n cluster-tools ...
