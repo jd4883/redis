@@ -11,11 +11,9 @@ on:
     paths:
       - 'README.md'
       - 'operator/Chart.yaml'
-      - 'operator/Chart.lock'
       - 'operator/values.yaml'
       - 'operator/templates/**'
       - 'cluster/Chart.yaml'
-      - 'cluster/Chart.lock'
       - 'cluster/values.yaml'
       - 'cluster/templates/**'
 
