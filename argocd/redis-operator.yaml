@@ -1,0 +1,6 @@
+chart: redis-operator
+project: cluster-tools
+path: operator
+targetRevision: HEAD
+gitValueFiles:
+  - values.yaml
