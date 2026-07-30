@@ -4,21 +4,19 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Chart.yaml'
-      - 'values.yaml'
-      - 'values/**'
+      - 'operator/**'
+      - 'cluster/**'
+      - 'argocd/**'
       - 'README.md'
       - '.helmignore'
-      - 'templates/**'
   pull_request:
     branches: [main]
     paths:
-      - 'Chart.yaml'
-      - 'values.yaml'
-      - 'values/**'
+      - 'operator/**'
+      - 'cluster/**'
+      - 'argocd/**'
       - 'README.md'
       - '.helmignore'
-      - 'templates/**'
   release:
     types: [published]
   workflow_dispatch:
@@ -37,7 +35,9 @@ jobs:
     uses: expectedbehaviors/github-actions/.github/workflows/helm-chart-ci.yml@main
     secrets: inherit
     with:
-      chart_path: .
+      chart_paths: |
+        operator
+        cluster
       tag_prefix: redis-v
       helm_repositories: |
         redis-operator=https://spotahome.github.io/redis-operator
